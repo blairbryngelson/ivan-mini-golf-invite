@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Epic Birthday Bash</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Russo+One&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            overflow-x: hidden;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .explosion {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #ff6b35, #f7931e, #ffcc02);
+            border-radius: 50%;
+            animation: explode 2s infinite alternate;
+            opacity: 0.6;
+        }
+        
+        .explosion:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .explosion:nth-child(2) {
+            top: 60%;
+            right: 5%;
+            animation-delay: 0.5s;
+        }
+        
+        .flame {
+            position: absolute;
+            width: 25px;
+            height: 60px;
+            background: linear-gradient(to top, #ff4500, #ffa500, #ffff00);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.8s infinite alternate;
+        }
+        
+        .flame:nth-child(3) { top: 15%; left: 10%; }
+        .flame:nth-child(4) { top: 45%; right: 15%; }
+        .flame:nth-child(5) { bottom: 25%; left: 8%; }
+        .flame:nth-child(6) { bottom: 40%; right: 12%; }
+        
+        @keyframes explode {
+            0% { transform: scale(0.8) rotate(0deg); }
+            100% { transform: scale(1.2) rotate(180deg); }
+        }
+        
+        @keyframes flicker {
+            0% { transform: rotate(-2deg) scale(1); }
+            100% { transform: rotate(2deg) scale(1.1); }
+        }
+        
+        .header {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff6600, #ffff00, #ff0000);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 0px #000, 6px 6px 10px rgba(255,0,0,0.8);
+            animation: fireText 2s infinite;
+            text-transform: uppercase;
+        }
+        
+        @keyframes fireText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff;
+            font-weight: 700;
+            margin: 10px 0;
+            animation: glow 1.5s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff; }
+            100% { text-shadow: 0 0 30px #00ffff, 0 0 60px #0080ff, 0 0 80px #0040ff; }
+        }
+        
+        .date-time {
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            color: #ffff00;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px #000;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(45deg, rgba(255,0,0,0.3), rgba(255,100,0,0.3));
+            border: 3px solid #ff6600;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255,100,0,0.6);
+        }
+        
+        .video-section {
+            position: relative;
+            margin: 40px 0;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .ivan-video {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 5px solid #ff6600;
+            box-shadow: 0 0 40px rgba(255,100,0,0.8);
+            animation: videoGlow 2s infinite alternate;
+        }
+        
+        @keyframes videoGlow {
+            0% { box-shadow: 0 0 40px rgba(255,100,0,0.8); }
+            100% { box-shadow: 0 0 60px rgba(255,0,0,0.9); }
+        }
+        
+        .ivan-hero {
+            position: relative;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #ff6b35);
+            padding: 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            border: 4px solid #ff0000;
+            box-shadow: 0 0 50px rgba(255,0,0,0.7);
+        }
+        
+        .ivan-title {
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            color: #ffff00;
+            text-shadow: 3px 3px 0px #ff0000, 6px 6px 10px #000;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: heroTitle 3s infinite;
+        }
+        
+        @keyframes heroTitle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05) rotate(1deg); }
+        }
+        
+        .lightning {
+            position: absolute;
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(to bottom, #fff, #00ffff, #fff);
+            animation: lightning 0.5s infinite;
+        }
+        
+        .lightning:nth-child(1) { top: 10px; left: 20px; }
+        .lightning:nth-child(2) { top: 10px; right: 20px; }
+        .lightning:nth-child(3) { bottom: 10px; left: 30px; }
+        .lightning:nth-child(4) { bottom: 10px; right: 30px; }
+        
+        @keyframes lightning {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; box-shadow: 0 0 20px #00ffff; }
+        }
+        
+        .details {
+            background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(30,30,60,0.9));
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #00ffff;
+            margin: 30px 0;
+            box-shadow: 0 0 30px rgba(0,255,255,0.5);
+            position: relative;
+        }
+        
+        .location, .activities {
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .location {
+            color: #ff6600;
+            font-weight: 700;
+        }
+        
+        .activities {
+            color: #00ff00;
+            font-weight: 600;
+        }
+        
+        .epic-text {
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            color: #ff0000;
+            text-shadow: 2px 2px 0px #ffff00, 4px 4px 10px #000;
+            text-align: center;
+            margin: 20px 0;
+            animation: epicPulse 2s infinite;
+        }
+        
+        @keyframes epicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* MINI GOLF GAME STYLES */
+        .golf-section {
+            background: linear-gradient(45deg, rgba(255,0,0,0.2), rgba(255,100,0,0.2));
+            padding: 30px 20px;
+            border-radius: 25px;
+            border: 4px solid #ff6600;
+            margin: 40px 0;
+            box-shadow: 0 0 40px rgba(255,100,0,0.6);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .golf-title {
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            color: #ffff00;
+            text-shadow: 3px 3px 0px #ff0000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .golf-instructions {
+            color: #00ffff;
+            text-align: center;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            margin-bottom: 20px;
+        }
+        
+        #golfCourse {
+            background: linear-gradient(180deg, #4a7c59, #5d8b5a);
+            border: 3px solid #228b22;
+            border-radius: 15px;
+            cursor: crosshair;
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            height: 500px;
+        }
+        
+        .score-display {
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #00ffff;
+            text-align: center;
+        }
+        
+        .strokes {
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            color: #ffff00;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .leaderboard {
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #00ffff;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0,255,255,0.5);
+        }
+        
+        .leaderboard h3 {
+            color: #ffff00;
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .leaderboard-entry {
+            background: rgba(255,100,0,0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ff6600;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+        }
+        
+        .champion {
+            background: rgba(255,215,0,0.3) !important;
+            border: 2px solid #ffd700 !important;
+            animation: champion-glow 2s infinite alternate;
+        }
+        
+        @keyframes champion-glow {
+            0% { box-shadow: 0 0 10px #ffd700; }
+            100% { box-shadow: 0 0 20px #ffd700; }
+        }
+        
+        .reset-btn, .name-input {
+            background: linear-gradient(45deg, #ff0000, #ff6600);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            cursor: pointer;
+            margin: 5px;
+            border: 2px solid #ffff00;
+            width: calc(50% - 10px);
+        }
+        
+        .reset-btn:hover, .reset-btn:active {
+            background: linear-gradient(45deg, #ff6600, #ffff00);
+            transform: scale(1.05);
+        }
+        
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,0,0,0.95);
+            color: #ffff00;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #ffff00;
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            z-index: 1000;
+            animation: celebrate 0.5s ease-in-out;
+            display: none;
+            text-align: center;
+            max-width: 90vw;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .boom-text {
+            position: fixed;
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: #ff0000;
+            text-shadow: 5px 5px 0px #ffff00, 10px 10px 20px #000;
+            z-index: 1;
+            opacity: 0.1;
+            animation: boom 4s infinite;
+        }
+        
+        .boom1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .boom2 { top: 60%; right: 5%; animation-delay: 2s; }
+        
+        @keyframes boom {
+            0%, 90%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            5%, 15% { opacity: 0.3; transform: scale(1) rotate(10deg); }
+        }
+        
+        @keyframes ballSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(0.8); }
+        }
+        
+        .ball-spinning {
+            animation: ballSpin 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="boom-text boom1">BOOM!</div>
+    <div class="boom-text boom2">POW!</div>
+    
+    <div class="explosion"></div>
+    <div class="explosion"></div>
+    <div class="flame"></div>
+    <div class="flame"></div>
+    <div class="flame"></div>
+    <div class="flame"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">IVAN IS TURNING ELEVEN!!</h1>
+            <h2 class="subtitle">ULTIMATE BIRTHDAY BASH</h2>
+            <div class="date-time">Saturday Aug. 9th at 10am</div>
+        </div>
+        
+        <div class="video-section">
+            <video class="ivan-video" autoplay muted loop playsinline>
+                <source src="ivan-video.mp4" type="video/mp4">
+                <div style="background: linear-gradient(45deg, #ff0000, #ff6600); padding: 30px; border-radius: 20px; text-align: center;">
+                    <div style="font-size: 3rem; color: #ffff00; text-shadow: 3px 3px 0px #000;">🎬 IVAN THE LEGEND! 🎬</div>
+                </div>
+            </video>
+        </div>
+        
+        <div class="ivan-hero">
+            <div class="lightning"></div>
+            <div class="lightning"></div>
+            <div class="lightning"></div>
+            <div class="lightning"></div>
+            <h2 class="ivan-title">🏆 IVAN THE CHAMPION 🏆</h2>
+            <div class="epic-text">🔥 THE BIRTHDAY LEGEND 🔥</div>
+            <div class="epic-text">⚡ MASTER OF AWESOME ⚡</div>
+            <div class="epic-text">🚗 SPEED DEMON HERO 🚗</div>
+        </div>
+        
+        <div class="details">
+            <div class="location">
+                🏁 <strong>ADVENTURE HEADQUARTERS:</strong><br>
+                Adventure Golf<br>
+                9650 N Sheridan Blvd<br>
+                Westminster, CO 80031
+            </div>
+            
+            <div class="activities">
+                🍕 <strong>EPIC FEAST & GAMES:</strong><br>
+                ⚡ Pizza and soda provided<br>
+                🏌️ 1 game of mini golf<br>
+                🏎️ 1 round of go-carts<br>
+                🚗 1 session of bumper cars
+            </div>
+            
+            <div class="epic-text">
+                💥 GET READY FOR THE MOST BADASS BIRTHDAY EVER! 💥
+            </div>
+            
+            <div class="epic-text">
+                🎯 IVAN'S LEGENDARY 11TH BIRTHDAY ADVENTURE! 🎯
+            </div>
+        </div>
+        
+        <!-- MINI GOLF GAME -->
+        <div class="golf-section">
+            <h2 class="golf-title">🏌️ WARM-UP MINI GOLF CHALLENGE 🏌️</h2>
+            <div class="golf-instructions">
+                🎯 Tap and drag from the ball to aim, release to shoot!<br>
+                ⚡ Can you match Ivan's legendary score of 1 stroke? ⚡
+            </div>
+            
+            <canvas id="golfCourse"></canvas>
+            <div class="celebration" id="celebration">🎉 AMAZING SHOT! 🎉</div>
+            
+            <div class="score-display">
+                <div class="strokes">Strokes: <span id="strokeCount">0</span></div>
+                <button class="reset-btn" onclick="resetGame()">🔄 New Game</button>
+                <button class="reset-btn" onclick="addScore()" id="addScoreBtn" style="display:none;">Add Score!</button>
+            </div>
+            
+            <div class="leaderboard">
+                <h3>🏆 PARTY CHAMPIONS 🏆</h3>
+                <div id="leaderboardList">
+                    <div class="leaderboard-entry champion">🥇 Ivan (Birthday Legend) - Hole in 1!</div>
+                </div>
+                <div style="margin-top: 15px; text-align: center;">
+                    <input type="text" id="playerName" placeholder="Your name" class="name-input" maxlength="15" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('golfCourse');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size for mobile
+        canvas.width = 350;
+        canvas.height = 500;
+        
+        let ball = { x: 175, y: 450, vx: 0, vy: 0, spinning: false };
+        let hole = { x: 175, y: 80, radius: 25 };
+        let strokes = 0;
+        let isAiming = false;
+        let aimStart = { x: 0, y: 0 };
+        let gameComplete = false;
+        
+        // Vertical obstacles for mobile
+        const obstacles = [
+            { x: 50, y: 200, width: 80, height: 15 },
+      //      { x: 220, y: 300, width: 80, height: 15 },
+            { x: 175, y: 300, width: 80, height: 15 },
+            { x: 100, y: 150, width: 15, height: 80 }
+        ];
+        
+        function drawCourse() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw obstacles
+            ctx.fillStyle = '#8B4513';
+            obstacles.forEach(obs => {
+                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+            });
+            
+            // Draw hole
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw flag
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(hole.x - 2, hole.y - hole.radius - 40, 4, 40);
+            ctx.fillStyle = '#ffff00';
+            ctx.fillRect(hole.x + 2, hole.y - hole.radius - 35, 20, 15);
+            
+            // Draw ball
+            ctx.fillStyle = ball.spinning ? '#ffff00' : '#fff';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw aim line
+            if (isAiming) {
+                ctx.strokeStyle = '#ff0000';
+                ctx.lineWidth = 4;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(ball.x, ball.y);
+                ctx.lineTo(aimStart.x, aimStart.y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+        }
+        
+        function updateBall() {
+            if (gameComplete) return;
+            
+            if (Math.abs(ball.vx) < 0.2 && Math.abs(ball.vy) < 0.2) {
+                ball.vx = 0;
+                ball.vy = 0;
+                ball.spinning = false;
+                return;
+            }
+            
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            
+            // Friction
+            ball.vx *= 0.97;
+            ball.vy *= 0.97;
+            
+            // Bounce off walls
+            if (ball.x <= 8 || ball.x >= canvas.width - 8) {
+                ball.vx *= -0.6;
+                ball.x = Math.max(8, Math.min(canvas.width - 8, ball.x));
+            }
+            if (ball.y <= 8 || ball.y >= canvas.height - 8) {
+                ball.vy *= -0.6;
+                ball.y = Math.max(8, Math.min(canvas.height - 8, ball.y));
+            }
+            
+            // Check obstacle collisions
+            obstacles.forEach(obs => {
+                if (ball.x + 8 > obs.x && ball.x - 8 < obs.x + obs.width &&
+                    ball.y + 8 > obs.y && ball.y - 8 < obs.y + obs.height) {
+                    
+                    if (ball.x < obs.x + obs.width/2) {
+                        ball.vx = Math.abs(ball.vx) * -0.7;
+                    } else {
+                        ball.vx = Math.abs(ball.vx) * 0.7;
+                    }
+                    if (ball.y < obs.y + obs.height/2) {
+                        ball.vy = Math.abs(ball.vy) * -0.7;
+                    } else {
+                        ball.vy = Math.abs(ball.vy) * 0.7;
+                    }
+                }
+            });
+            
+            // Check if ball is in hole
+            const distToHole = Math.sqrt((ball.x - hole.x) ** 2 + (ball.y - hole.y) ** 2);
+            if (distToHole < hole.radius - 6) {
+                ball.vx = 0;
+                ball.vy = 0;
+                ball.x = hole.x;
+                ball.y = hole.y;
+                ball.spinning = true;
+                
+                if (!gameComplete) {
+                    gameComplete = true;
+                    showCelebration();
+                    document.getElementById('addScoreBtn').style.display = 'inline-block';
+                    document.getElementById('playerName').style.display = 'inline-block';
+                }
+            }
+        }
+        
+        function showCelebration() {
+            const celebration = document.getElementById('celebration');
+            if (strokes === 1) {
+                celebration.innerHTML = '🔥 HOLE IN ONE! LEGENDARY! 🔥';
+            } else if (strokes <= 3) {
+                celebration.innerHTML = '🎉 AMAZING! 🎉';
+            } else {
+                celebration.innerHTML = '⚡ GREAT SHOT! ⚡';
+            }
+            celebration.style.display = 'block';
+            setTimeout(() => {
+                celebration.style.display = 'none';
+            }, 3000);
+        }
+        
+        function resetGame() {
+            ball = { x: 175, y: 450, vx: 0, vy: 0, spinning: false };
+            strokes = 0;
+            gameComplete = false;
+            isAiming = false;
+            document.getElementById('strokeCount').textContent = strokes;
+            document.getElementById('addScoreBtn').style.display = 'none';
+            document.getElementById('playerName').style.display = 'none';
+            document.getElementById('playerName').value = '';
+        }
+        
+        function addScore() {
+            const name = document.getElementById('playerName').value.trim();
+            if (!name || !gameComplete) return;
+            
+            const leaderboard = document.getElementById('leaderboardList');
+            const entry = document.createElement('div');
+            entry.className = 'leaderboard-entry';
+            
+            if (strokes === 1) {
+                entry.innerHTML = `🥇 ${name} - ${strokes} stroke (HOLE IN ONE!)`;
+                entry.className += ' champion';
+            } else if (strokes <= 3) {
+                entry.innerHTML = `🏅 ${name} - ${strokes} strokes (Birdie!)`;
+                entry.className += ' champion';
+            } else {
+                entry.innerHTML = `⚡ ${name} - ${strokes} strokes`;
+            }
+            
+            leaderboard.appendChild(entry);
+            document.getElementById('playerName').value = '';
+            document.getElementById('addScoreBtn').style.display = 'none';
+            document.getElementById('playerName').style.display = 'none';
+        }
+        
+        // Touch and mouse events
+        function getEventPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            return {
+                x: (clientX - rect.left) * (canvas.width / rect.width),
+                y: (clientY - rect.top) * (canvas.height / rect.height)
+            };
+        }
+        
+        function startAim(e) {
+            if (gameComplete || (ball.vx !== 0 || ball.vy !== 0)) return;
+            
+            const pos = getEventPos(e);
+            const distToBall = Math.sqrt((pos.x - ball.x) ** 2 + (pos.y - ball.y) ** 2);
+            
+            if (distToBall < 50) {
+                isAiming = true;
+                aimStart = pos;
+                e.preventDefault();
+            }
+        }
+        
+        function updateAim(e) {
+            if (!isAiming) return;
+            aimStart = getEventPos(e);
+            e.preventDefault();
+        }
+        
+        function shoot(e) {
+            if (!isAiming) return;
+            
+            const power = Math.min(Math.sqrt((aimStart.x - ball.x) ** 2 + (aimStart.y - ball.y) ** 2) / 15, 12);
+            const angle = Math.atan2(ball.y - aimStart.y, ball.x - aimStart.x);
+            
+            ball.vx = Math.cos(angle) * power;
+            ball.vy = Math.sin(angle) * power;
+            
+            strokes++;
+            document.getElementById('strokeCount').textContent = strokes;
+            
+            isAiming = false;
+            e.preventDefault();
+        }
+        
+        // Event listeners
+        canvas.addEventListener('mousedown', startAim);
+        canvas.addEventListener('mousemove', updateAim);
+        canvas.addEventListener('mouseup', shoot);
+        
+        canvas.addEventListener('touchstart', startAim);
+        canvas.addEventListener('touchmove', updateAim);
+        canvas.addEventListener('touchend', shoot);
+        
+        // Game loop
+        function gameLoop() {
+            updateBall();
+            drawCourse();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        
+function loadScores() {
+    fetch('/.netlify/functions/get-scores')
+        .then(res => res.json())
+        .then(scores => {
+            const leaderboard = document.getElementById('leaderboardList');
+            leaderboard.innerHTML = '<div class="leaderboard-entry champion">🥇 Ivan (Birthday Legend) - Hole in 1!</div>';
+            scores.forEach(score => {
+                const entry = document.createElement('div');
+                entry.className = 'leaderboard-entry';
+                entry.textContent = `${score.name} - ${score.strokes} stroke${score.strokes > 1 ? 's' : ''}`;
+                leaderboard.appendChild(entry);
+            });
+        });
+}
+
+
+function addScore() {
+    const name = document.getElementById('playerName').value.trim();
+    if (!name || !gameComplete) return;
+
+    fetch('/.netlify/functions/add-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, strokes })
+    })
+    .then(res => res.json())
+    .then(() => {
+        loadScores();
+        document.getElementById('playerName').value = '';
+        document.getElementById('addScoreBtn').style.display = 'none';
+        document.getElementById('playerName').style.display = 'none';
+    });
+}
+
+
+
+function loadScores() {
+    fetch('/.netlify/functions/get-scores')
+        .then(res => res.json())
+        .then(scores => {
+            const leaderboard = document.getElementById('leaderboardList');
+            leaderboard.innerHTML = '<div class="leaderboard-entry champion">🥇 Ivan (Birthday Legend) - Hole in 1!</div>';
+            scores.forEach(score => {
+                const entry = document.createElement('div');
+                entry.className = 'leaderboard-entry';
+                entry.textContent = `${score.name} - ${score.strokes} stroke${score.strokes > 1 ? 's' : ''}`;
+                leaderboard.appendChild(entry);
+            });
+        })
+        .catch(err => {
+            console.error("Failed to load scores:", err);
+        });
+}
+
+function addScore() {
+    const name = document.getElementById('playerName').value.trim();
+    if (!name || !gameComplete) return;
+
+    fetch('/.netlify/functions/add-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, strokes })
+    })
+    .then(res => res.json())
+    .then(() => {
+        loadScores();
+        document.getElementById('playerName').value = '';
+        document.getElementById('addScoreBtn').style.display = 'none';
+        document.getElementById('playerName').style.display = 'none';
+    })
+    .catch(err => {
+        console.error("Failed to add score:", err);
+    });
+}
+
+
+
+function loadScores() {
+    console.log("Loading scores...");
+    fetch('/.netlify/functions/get-scores')
+        .then(res => {
+            console.log("GET /get-scores response:", res);
+            return res.json();
+        })
+        .then(scores => {
+            console.log("Parsed scores:", scores);
+            const leaderboard = document.getElementById('leaderboardList');
+            leaderboard.innerHTML = '<div class="leaderboard-entry champion">🥇 Ivan (Birthday Legend) - Hole in 1!</div>';
+            scores.forEach(score => {
+                const entry = document.createElement('div');
+                entry.className = 'leaderboard-entry';
+                entry.textContent = `${score.name} - ${score.strokes} stroke${score.strokes > 1 ? 's' : ''}`;
+                leaderboard.appendChild(entry);
+            });
+        })
+        .catch(err => {
+            console.error("Failed to load scores:", err);
+        });
+}
+
+function addScore() {
+    const name = document.getElementById('playerName').value.trim();
+    if (!name || !gameComplete) {
+        console.warn("Invalid name or game not complete", { name, gameComplete });
+        return;
+    }
+
+    console.log("Submitting score...", { name, strokes });
+
+    fetch('/.netlify/functions/add-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, strokes })
+    })
+    .then(res => {
+        console.log("POST /add-score response:", res);
+        return res.json();
+    })
+    .then(data => {
+        console.log("POST success:", data);
+        loadScores();
+        document.getElementById('playerName').value = '';
+        document.getElementById('addScoreBtn').style.display = 'none';
+        document.getElementById('playerName').style.display = 'none';
+    })
+    .catch(err => {
+        console.error("Failed to add score:", err);
+    });
+}
+
+
+// Start game
+        resetGame();
+loadScores();
+loadScores();
+        gameLoop();
+    </script>
+</body>
+</html>
